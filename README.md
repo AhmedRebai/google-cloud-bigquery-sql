@@ -24,5 +24,5 @@
 
 ## Requêter des tables JSON
 - Qu'est-ce qu'une table JSON?
-- Comment UNTESTER ces tables?
+- Comment UNESTER ces tables?
 - Exemples
