@@ -11,3 +11,13 @@ FROM `bigquery-public-data.new_york_taxi_trips.tlc_green_trips_2018`
 order by fare_amount, tip_amount desc
 ```
 
+# How to select the hour from a date column like this one "2018-01-01 04:10:01 UTC"
+``` sql
+select 
+extract(HOUR from datetime(pickup_datetime)) as hour, 
+count(*) as num_trips
+from `bigquery-public-data.new_york_taxi_trips.tlc_green_trips_2018`
+group by hour
+order by num_trips desc
+```
+
