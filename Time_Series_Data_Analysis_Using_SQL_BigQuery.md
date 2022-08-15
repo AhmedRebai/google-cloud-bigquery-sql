@@ -32,3 +32,13 @@ from `bigquery-public-data.new_york_taxi_trips.tlc_green_trips_2018`
 group by hour
 order by tip desc
 ```
+
+# How to get the day names and to group by the weekday 
+``` sql
+select 
+format_date('%A', pickup_datetime) as weekday,
+count(*) as num_trips
+from `bigquery-public-data.new_york_taxi_trips.tlc_green_trips_2018`
+group by weekday
+order by num_trips desc
+```
