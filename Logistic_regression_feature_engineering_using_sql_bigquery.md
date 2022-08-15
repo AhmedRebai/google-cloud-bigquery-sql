@@ -51,3 +51,20 @@ select * except(dataframe)
 from `mon-premier-projet-2022-ahmed.bank_marketing.marketing_tab`
 where dataframe = 'training'
 ```
+
+### How to get the Model training info
+``` sql
+select 
+*
+from 
+ml.training_info(model `mon-premier-projet-2022-ahmed.bank_marketing.marketing_model`)
+```
+
+### How to get features infos like describe in pandas
+``` sql
+select 
+* 
+from 
+ml.feature_info(model `mon-premier-projet-2022-ahmed.bank_marketing.marketing_model`)
+```
+
