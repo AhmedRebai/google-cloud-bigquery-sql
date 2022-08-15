@@ -57,3 +57,12 @@ from (
   group by hour
   ) order by fare desc
  ```
+ 
+ # How to resample by day 
+ ``` sql 
+ select 
+  datetime_trunc(pickup_datetime,day) as time, 
+  count(*) as num_trips
+from `bigquery-public-data.new_york_taxi_trips.tlc_green_trips_2018`
+group by time
+ ```
