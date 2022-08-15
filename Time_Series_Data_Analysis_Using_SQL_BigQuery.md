@@ -79,7 +79,7 @@ group by time
 select * from daily_trips
  ```
  
- # A good example for a level 3 aggregation query 
+ # A good example for a level 3 aggregation query: with statement + coalesce + lag 
  ``` sql 
  with daily_trips as (
 select 
@@ -92,4 +92,17 @@ from `bigquery-public-data.new_york_taxi_trips.tlc_green_trips_2018`
 group by time
 ) )
 select *, coalesce(round((num_trips - previous_trips)/previous_trips * 100),0) as change from daily_trips order by time
+ ```
+ 
+ # Another good example 
+ ``` sql
+ with daily_trips as (
+select 
+  datetime_trunc(pickup_datetime, day) as time,
+  count(*) as num_trips
+from `bigquery-public-data.new_york_taxi_trips.tlc_green_trips_2018`
+group by time
+)
+select *, round(avg(num_trips) over(order by time rows between 6 preceding and current row),2) as ma_7days
+from daily_trips order by time
  ```
