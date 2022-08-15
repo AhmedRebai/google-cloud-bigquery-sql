@@ -68,3 +68,10 @@ from
 ml.feature_info(model `mon-premier-projet-2022-ahmed.bank_marketing.marketing_model`)
 ```
 
+### How to get the model weights
+``` sql 
+select 
+*
+from 
+ml.weights(Model `mon-premier-projet-2022-ahmed.bank_marketing.marketing_model`)
+```
