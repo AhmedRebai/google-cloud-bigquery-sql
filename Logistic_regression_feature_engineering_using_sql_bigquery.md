@@ -94,3 +94,28 @@ from ml.predict(model `mon-premier-projet-2022-ahmed.bank_marketing.marketing_mo
 (select * from `mon-premier-projet-2022-ahmed.bank_marketing.marketing_tab` where dataframe = 'prediction')
 )
 ```
+
+### Doing features engineering and retraining the model on the train dataset
+``` sql 
+create or replace model 
+`mon-premier-projet-2022-ahmed.bank_marketing.marketing_model_features`
+transform(
+  ml.quantile_bucketize(age,5) over() as bucketized_age,
+  ml.feature_cross(struct(job, education )) job_education,
+  marital, balance, housing, loan, contact, day, month, pdays, previous,
+  poutcome, target
+  )
+options
+(
+ model_type = 'LOGISTIC_REG',
+ auto_class_weights=TRUE,
+ input_label_cols=['target']
+) as
+select 
+* except(dataframe, campaign, derog)
+from 
+`mon-premier-projet-2022-ahmed.bank_marketing.marketing_tab`
+where
+dataframe = 'training'
+
+```
