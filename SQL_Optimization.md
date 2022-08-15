@@ -188,6 +188,30 @@ t2
 on t1.itemid = t2.itemid
 ```
 
+### 8 - Use Max instead of Rank
+
+* Instead of this 
+``` sql 
+SELECT *
+from (
+select
+userid,
+rank() over (order by prdate desc) as rank
+from table1
+)
+where ranking = 1
+```
+
+* Do this
+``` sql 
+SELECT userid, max(prdate)
+from table1
+group by 1
+```
+
+
+
+
 
 
 
