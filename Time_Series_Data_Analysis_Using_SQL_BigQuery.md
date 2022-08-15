@@ -78,3 +78,18 @@ group by time
 )
 select * from daily_trips
  ```
+ 
+ # A good example for a level 3 aggregation query 
+ ``` sql 
+ with daily_trips as (
+select 
+time, num_trips, lag(num_trips, 7) over (order by time)  as previous_trips
+from (
+select 
+  datetime_trunc(pickup_datetime, day) as time,
+  count(*) as num_trips
+from `bigquery-public-data.new_york_taxi_trips.tlc_green_trips_2018`
+group by time
+) )
+select *, coalesce(round((num_trips - previous_trips)/previous_trips * 100),0) as change from daily_trips order by time
+ ```
