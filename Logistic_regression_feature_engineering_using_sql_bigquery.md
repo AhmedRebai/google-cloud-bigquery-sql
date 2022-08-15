@@ -38,3 +38,16 @@ from `mon-premier-projet-2022-ahmed.bank_marketing.marketing_tab`
 group by dataframe, target
 order by dataframe
 ```
+
+### Perform a classification using the mathematical model logistic regression with sql
+``` sql 
+create or replace model `mon-premier-projet-2022-ahmed.bank_marketing.marketing_model`
+options
+(model_type='LOGISTIC_REG',
+auto_class_weights=TRUE,
+input_label_cols=['target']
+) as 
+select * except(dataframe)
+from `mon-premier-projet-2022-ahmed.bank_marketing.marketing_tab`
+where dataframe = 'training'
+```
