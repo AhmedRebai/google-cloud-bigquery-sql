@@ -103,8 +103,8 @@ small_table
 ON small_table.id = large_table.id
 ```
 
-### 5 - Use simple equi-joins : Two tables with date string e.g., ‘2020-09-01’, but one of the tables only has columns for year, month,
-day values
+### 5 - Use simple equi-joins : Two tables with date string e.g., ‘2020-09-01’, but one of the tables only has columns for year, month, day values
+
 * Instead of this 
 ``` sql 
 SELECT *
@@ -130,6 +130,33 @@ table2 b
 ON a.date = new.date
 ```
 
+### 6 - Always "GROUP BY" by the attribute/column with the largest number of unique entities/values
+
+* Instead of this 
+``` sql 
+select
+main_category,
+sub_category,
+itemid,
+sum(price)
+from
+table1
+group by
+main_category, sub_category, itemid
+```
+
+* Do this
+``` sql 
+select
+main_category,
+sub_category,
+itemid,
+sum(price)
+from
+table1
+group by
+itemid, sub_category, main_category
+```
 
 
 
