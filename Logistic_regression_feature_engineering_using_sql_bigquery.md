@@ -85,3 +85,12 @@ from ml.evaluate(model `mon-premier-projet-2022-ahmed.bank_marketing.marketing_m
 (select * from `mon-premier-projet-2022-ahmed.bank_marketing.marketing_tab` where dataframe = 'evaluation')
 )
 ```
+
+### How to predict 
+``` sql 
+select *
+from ml.predict(model `mon-premier-projet-2022-ahmed.bank_marketing.marketing_model`,
+
+(select * from `mon-premier-projet-2022-ahmed.bank_marketing.marketing_tab` where dataframe = 'prediction')
+)
+```
