@@ -75,3 +75,13 @@ select
 from 
 ml.weights(Model `mon-premier-projet-2022-ahmed.bank_marketing.marketing_model`)
 ```
+
+
+### How to evaluate the logistic regression on the evaluation dataset
+``` sql
+select *
+from ml.evaluate(model `mon-premier-projet-2022-ahmed.bank_marketing.marketing_model`,
+
+(select * from `mon-premier-projet-2022-ahmed.bank_marketing.marketing_tab` where dataframe = 'evaluation')
+)
+```
