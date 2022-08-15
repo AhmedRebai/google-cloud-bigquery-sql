@@ -66,3 +66,15 @@ from (
 from `bigquery-public-data.new_york_taxi_trips.tlc_green_trips_2018`
 group by time
  ```
+ 
+ # How to use With statement in sql 
+ ``` sql 
+ with daily_trips as (
+select 
+  datetime_trunc(pickup_datetime,day) as time, 
+  count(*) as num_trips
+from `bigquery-public-data.new_york_taxi_trips.tlc_green_trips_2018`
+group by time
+)
+select * from daily_trips
+ ```
