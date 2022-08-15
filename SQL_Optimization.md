@@ -209,6 +209,18 @@ from table1
 group by 1
 ```
 
+### 10 - Use approx_distinct() instead of count(distinct) for very large datasets
+
+### 11 - Use approx_percentile(metric, 0.5) for median
+
+### 12 - Avoid UNIONs where possible
+
+### 13 - Use WITH statements vs. nested subqueries
+
+* FROM this document https://media-exp1.licdn.com/dms/document/C4D1FAQEsJUQOtsZH2g/feedshare-document-pdf-analyzed/0/1660554784534?e=1661385600&v=beta&t=SzNfWOAxVqUThrFpseiuGvW70A_bTEkVTQY7061021o
+
+
+
 
 
 
