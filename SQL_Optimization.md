@@ -103,4 +103,33 @@ small_table
 ON small_table.id = large_table.id
 ```
 
+### 5 - Use simple equi-joins : Two tables with date string e.g., ‘2020-09-01’, but one of the tables only has columns for year, month,
+day values
+* Instead of this 
+``` sql 
+SELECT *
+FROM
+table1 a
+JOIN
+table2 b
+ON a.date = CONCAT(b.year, '-',
+b.month, '-', b.day)
+```
+
+* Do this
+``` sql 
+SELECT *
+FROM
+table1 a
+JOIN (
+select
+name, CONCAT(b.year, '-', b.month, '-', b.day) as date
+from
+table2 b
+) new
+ON a.date = new.date
+```
+
+
+
 
