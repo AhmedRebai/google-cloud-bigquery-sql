@@ -106,3 +106,12 @@ group by time
 select *, round(avg(num_trips) over(order by time rows between 6 preceding and current row),2) as ma_7days
 from daily_trips order by time
  ```
+ 
+ # A simple moving average 
+ ``` sql 
+ select 
+  pickup_datetime,
+  fare_amount,
+  sum(fare_amount) over (order by pickup_datetime rows between 29 preceding and current row) as total_fare
+from `bigquery-public-data.new_york_taxi_trips.tlc_green_trips_2018`
+ ```
