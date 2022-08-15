@@ -42,3 +42,18 @@ from `bigquery-public-data.new_york_taxi_trips.tlc_green_trips_2018`
 group by weekday
 order by num_trips desc
 ```
+
+# How to lag with sql 
+``` sql
+select 
+hour,
+fare,
+lag(fare) over (order by fare) as fare_lag
+from (
+  select 
+  extract(hour from datetime(pickup_datetime)) as hour,
+  avg(fare_amount) as fare
+  from `bigquery-public-data.new_york_taxi_trips.tlc_green_trips_2018`
+  group by hour
+  ) order by fare desc
+ ```
