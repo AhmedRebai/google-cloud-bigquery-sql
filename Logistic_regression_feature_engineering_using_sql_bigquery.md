@@ -30,3 +30,11 @@ round(abs(rand()),1) as split_field
 from `mon-premier-projet-2022-ahmed.bank_marketing.marketing` )
 ```
 
+### To verify the random sampling method  (train test split) 
+``` sql
+select
+dataframe, target, count(*)
+from `mon-premier-projet-2022-ahmed.bank_marketing.marketing_tab`
+group by dataframe, target
+order by dataframe
+```
