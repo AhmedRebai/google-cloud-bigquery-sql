@@ -1,0 +1,1 @@
+-- Build and Optimize Data Warehouses with BigQuery: Challenge Lab
