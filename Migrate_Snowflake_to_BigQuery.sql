@@ -29,6 +29,8 @@ from files (
   uris = ['gs://tcd_repo/data/environmental/animals/pets.csv']
 );
 
+-- Task 2. Update BigQuery table data using DML statements
+
 
 
 
