@@ -166,5 +166,55 @@ FROM
 
 -- Task 4. Create new tables and views using DDL statements
 
+-- -- CREATE OR REPLACE TABLE 
+-- --   animals_dataset.owners_pets AS (
+-- --   SELECT 
+-- --     o.OwnerID, 
+-- --     o.Name AS OwnerName, 
+-- --     ARRAY_AGG(STRUCT(
+-- --       p.PetID, 
+-- --       p.Name AS PetName, 
+-- --       p.Type, 
+-- --       p.Weight)) AS Pets 
+-- --   FROM 
+-- --     animals_dataset.owners AS o 
+-- --   JOIN 
+-- --     animals_dataset.pets AS p 
+-- --   ON 
+-- --     o.OwnerID = p.OwnerID
+-- --   GROUP BY 
+-- --     o.OwnerID, o.Name
+-- --   );
+
+-- SELECT 
+--   OwnerName, 
+--   ARRAY_LENGTH(Pets) AS count 
+-- FROM 
+--   animals_dataset.owners_pets 
+-- ORDER BY 
+--   count DESC;
+
+-- CREATE OR REPLACE VIEW
+--   animals_dataset.small_pets AS ( 
+--   SELECT 
+--     * 
+--   FROM 
+--     animals_dataset.pets
+--   WHERE 
+--     weight <= 20
+--   );
+
+CREATE OR REPLACE MATERIALIZED VIEW 
+  animals_dataset.pet_weight_by_type AS ( 
+  SELECT 
+    type, 
+    SUM(Weight) AS total_weight 
+  FROM 
+    animals_dataset.pets
+  GROUP BY 
+    type 
+  );
+
+
 
 
