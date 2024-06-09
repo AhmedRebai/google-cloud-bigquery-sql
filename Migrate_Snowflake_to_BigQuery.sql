@@ -215,6 +215,49 @@ CREATE OR REPLACE MATERIALIZED VIEW
     type 
   );
 
+-- Task 5. Define custom UDFs and stored procedures
+
+-- CREATE OR REPLACE FUNCTION animals_dataset.PoundsToKilos(pounds FLOAT64) 
+-- AS ( 
+--   round(pounds / 2.2, 1) 
+-- );
+
+-- SELECT 
+--   name, 
+--   weight AS pounds, 
+--   animals_dataset.PoundsToKilos(Weight) AS Kilos 
+-- FROM 
+--   animals_dataset.pets;
+
+-- CREATE OR REPLACE PROCEDURE animals_dataset.create_pet( 
+--   customerID INT64, type STRING, name STRING, weight FLOAT64, out newPetID INT64) 
+-- BEGIN
+-- SET newPetID = (SELECT MAX(PetID) + 1 FROM animals_dataset.pets); 
+-- INSERT INTO animals_dataset.pets (PetID, OwnerID, Type, Name, Weight) 
+--     VALUES(newPetID, customerID, type, name, weight); 
+-- END
+
+DECLARE newPetID INT64; 
+CALL animals_dataset.create_pet(1, 'Dog', 'Duke', 15.0, newPetID); 
+SELECT * 
+FROM 
+  animals_dataset.pets 
+WHERE 
+  PetID = newPetID;
+
+DECLARE newPetID INT64; 
+CALL animals_dataset.create_pet(4, 'Cat', 'Fluffy', 6.0, newPetID); 
+SELECT * 
+FROM 
+  animals_dataset.pets 
+WHERE 
+  PetID = newPetID;
+
+SELECT * 
+FROM 
+  animals_dataset.pets 
+WHERE 
+  Name in ('Duke', 'Fluffy');
 
 
 
