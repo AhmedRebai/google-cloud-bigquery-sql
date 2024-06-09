@@ -72,6 +72,99 @@ WHERE
 -- Task 3. Join data and write CTEs using SQL SELECT statements
 
 
+-- -- -- -- SELECT 
+-- -- -- --   o.Name, p.Type, p.Name, p.Weight 
+-- -- -- -- FROM 
+-- -- -- --   animals_dataset.owners o 
+-- -- -- -- JOIN 
+-- -- -- --   animals_dataset.pets p 
+-- -- -- -- ON 
+-- -- -- --   o.OwnerID = p.OwnerID; 
+
+-- -- -- SELECT 
+-- -- --   o.Name, p.Type, p.Name, p.Weight 
+-- -- -- FROM 
+-- -- --   animals_dataset.owners o 
+-- -- -- JOIN 
+-- -- --   animals_dataset.pets p
+-- -- -- ON 
+-- -- --   o.OwnerID = p.OwnerID 
+-- -- -- WHERE 
+-- -- --   p.Type = "Canine"; 
+
+-- -- SELECT 
+-- --   o.Name, p.Type, p.Name, p.Weight 
+-- -- FROM 
+-- --   animals_dataset.owners o 
+-- -- JOIN 
+-- --   animals_dataset.pets p
+-- -- ON 
+-- --   o.OwnerID = p.OwnerID 
+-- -- WHERE 
+-- --   p.Type = "Canine"
+-- -- ORDER BY 
+-- --   o.Name ASC;
+
+-- SELECT 
+--   type, COUNT(*) AS count 
+-- FROM 
+--   animals_dataset.pets 
+-- GROUP BY 
+--   type
+-- ORDER BY 
+--   count DESC;
+
+-- SELECT 
+--   o.Name, COUNT(p.Name) AS count 
+-- FROM 
+--   animals_dataset.owners o 
+-- JOIN 
+--   animals_dataset.pets p 
+-- ON 
+--   o.OwnerID = p.OwnerID
+-- GROUP BY 
+--   o.Name
+-- ORDER BY 
+--   count DESC; 
+
+-- SELECT 
+--   o.OwnerID, 
+--   o.Name AS OwnerName, 
+--   ARRAY_AGG(STRUCT( 
+--     p.Name AS PetName, 
+--     p.Type, 
+--     p.Weight)) AS Pets 
+-- FROM 
+--   animals_dataset.owners AS o 
+-- JOIN 
+--   animals_dataset.pets AS p 
+-- ON 
+--   o.OwnerID = p.OwnerID
+-- GROUP BY 
+--   o.OwnerID, o.Name; 
+
+WITH owners_pets AS (SELECT 
+  o.OwnerID, 
+  o.Name AS OwnerName, 
+  ARRAY_AGG(STRUCT( 
+    p.Name AS PetName, 
+    p.Type, 
+    p.Weight)) AS Pets
+FROM 
+  animals_dataset.owners AS o 
+JOIN 
+  animals_dataset.pets AS p 
+ON 
+  o.OwnerID = p.OwnerID 
+GROUP BY 
+  o.OwnerID, o.Name) 
+SELECT 
+  op.OwnerName, op.Pets 
+FROM 
+  owners_pets AS op;
+
+
+-- Task 4. Create new tables and views using DDL statements
 
 
 
